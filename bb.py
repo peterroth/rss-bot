@@ -23,8 +23,10 @@ client_secret = parser.get("config", "client_secret")
 username = parser.get("config", "username")
 password = parser.get("config", "password")
 subreddit = parser.get("config", "subreddit")
+flair_id = parser.get("config", "flair_id")
 reddit = praw.Reddit(user_agent="GCP:Blog-bot:v1 (by u/ItsMeRPeter)", client_id=client_id,
                      client_secret=client_secret, username=username, password=password)
+reddit.validate_on_submit = True
 
 while True:
     time.sleep(600)
@@ -34,5 +36,5 @@ while True:
     if new_entry_link != last_entry_link:
         title = new_entry.title
         link = new_entry_link
-        reddit.subreddit(subreddit).submit(flair_text='Blog', kind='link', title=title, url=link)
+        reddit.subreddit(subreddit).submit(flair_id=flair_id, title=title, url=link, send_replies=False)
         last_entry_link = new_entry_link

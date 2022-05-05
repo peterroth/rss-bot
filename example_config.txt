@@ -5,3 +5,4 @@ client_secret=client's secret
 username=the username
 password=the password of user
 subreddit=the subreddit to post into
+flair_id=the ID of the flair
