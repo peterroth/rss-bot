@@ -34,5 +34,5 @@ while True:
     if new_entry_link != last_entry_link:
         title = new_entry.title
         link = new_entry_link
-        reddit.subreddit(subreddit).submit(flair_text = 'Blog', kind = 'link', title=title, url=link)
+        reddit.subreddit(subreddit).submit(flair_text='Blog', kind='link', title=title, url=link)
         last_entry_link = new_entry_link
