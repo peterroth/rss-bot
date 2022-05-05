@@ -1,0 +1,7 @@
+[config]
+feed_link=link to the feed
+client_id=client's ID
+client_secret=client's secret
+username=the username
+password=the password of user
+subreddit=the subreddit to post into
