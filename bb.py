@@ -1,4 +1,4 @@
-# Blog-bot that parses an RSS and if a new entry is shown posts its title and URL in a subreddit
+#!/usr/bin/env python3
 import configparser
 import feedparser
 import os.path
