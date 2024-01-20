@@ -39,8 +39,14 @@ while True:
     new_entry = feed.entries[0]
     new_entry_link = new_entry.link
     if new_entry_link != last_entry_link:
-        title = new_entry.title
-        link = new_entry_link
+# Let's check if the article is already posted in the last week
+# If it's a new entry, it shouldn't be
+        search_title = new_entry.title
+        for submission in reddit.subreddit(subreddit).search(search_title, syntax="plain", time_filter="week"):
+            print("Article is already posted.")
+        else:
 # Let's post on Reddit
-        reddit.subreddit(subreddit).submit(flair_id=flair_id, title=title, url=link, send_replies=False)
-        last_entry_link = new_entry_link
+            title = new_entry.title
+            link = new_entry_link
+            reddit.subreddit(subreddit).submit(flair_id=flair_id, title=title, url=link, send_replies=False)
+            last_entry_link = new_entry_link
