@@ -43,7 +43,7 @@ while True:
 # If it's a new entry, it shouldn't be
         search_title = new_entry.title
         for submission in reddit.subreddit(subreddit).search(search_title, syntax="plain", time_filter="week"):
-            print("Article is already posted.")
+            last_entry_link = new_entry_link
         else:
 # Let's post on Reddit
             title = new_entry.title
