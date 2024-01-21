@@ -25,7 +25,7 @@ client_id = parser.get("config", "client_id")
 client_secret = parser.get("config", "client_secret")
 username = parser.get("config", "username")
 password = parser.get("config", "password")
-subreddit = parser.get("config", "subreddit")
+subreddit = parser.get("config", "subreddit").lower()
 flair_id = parser.get("config", "flair_id")
 reddit = praw.Reddit(user_agent="Blog-bot:v1 (by u/ItsMeRPeter)", client_id=client_id,
                      client_secret=client_secret, username=username, password=password)
