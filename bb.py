@@ -39,19 +39,19 @@ last_entry_link = latest_entry.link
 # Endless loop what will check the RSS feed in every 10 minutes and compare if there is a new entry
 # The entries' link is the unique identifier what is compared because that must be unique
 while True:
-    time.sleep(600)
-    feed = feedparser.parse(feed_link)
-    new_entry = feed.entries[0]
-    new_entry_link = new_entry.link
-    if new_entry_link != last_entry_link:
+  time.sleep(600)
+  feed = feedparser.parse(feed_link)
+  new_entry = feed.entries[0]
+  new_entry_link = new_entry.link
+  if new_entry_link != last_entry_link:
 # Let's check if the article is already posted in the last week
 # If it's a new entry, it shouldn't be
-        search_title = new_entry.title
-        for submission in reddit.subreddit(subreddit).search(search_title, syntax="plain", time_filter="week"):
-            last_entry_link = new_entry_link
-        else:
+    search_title = new_entry.title
+    for submission in reddit.subreddit(subreddit).search(search_title, syntax="plain", time_filter="week"):
+      last_entry_link = new_entry_link
+    else:
 # Let's post on Reddit
-            title = new_entry.title
-            link = new_entry_link
-            reddit.subreddit(subreddit).submit(flair_id=flair_id, title=title, url=link, send_replies=False)
-            last_entry_link = new_entry_link
+      title = new_entry.title
+      link = new_entry_link
+      reddit.subreddit(subreddit).submit(flair_id=flair_id, title=title, url=link, send_replies=False)
+      last_entry_link = new_entry_link
