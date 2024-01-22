@@ -31,11 +31,6 @@ reddit = praw.Reddit(user_agent="Blog-bot:v1 (by u/ItsMeRPeter)", client_id=clie
                      client_secret=client_secret, username=username, password=password)
 reddit.validate_on_submit = True
 
-# To avoid posting at start-up, check what's the latest article and store it
-feed = parse(feed_link)
-latest_entry = feed.entries[0]
-last_entry_link = latest_entry.link
-
 # Endless loop what will check the RSS feed in every 10 minutes and compare if there is a new entry
 # The entries' link is the unique identifier what is compared because that must be unique
 while True:
