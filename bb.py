@@ -8,11 +8,11 @@ from time import sleep
 # Check if the config file exists
 config_file = os.path.exists("config.txt")
 if config_file:
-    parser = configparser.ConfigParser()
-    parser.read("config.txt")
+  parser = configparser.ConfigParser()
+  parser.read("config.txt")
 else:
-    print("The required config.txt doesn't exist. Please edit and rename the example_config.txt")
-    exit(1)
+  print("The required config.txt doesn't exist. Please edit and rename the example_config.txt")
+  exit(1)
 
 # Parse the RSS feed for the first time, we will compare with the got entry later
 last_entries_ids = []
