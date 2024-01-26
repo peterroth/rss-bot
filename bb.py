@@ -15,10 +15,11 @@ else:
     exit(1)
 
 # Parse the RSS feed for the first time, we will compare with the got entry later
+last_entries_ids = []
 feed_link = parser.get("config", "feed_link")
 feed = parse(feed_link)
-last_entry = feed.entries[0]
-last_entry_link = last_entry.link
+for entry in feed.entries:
+  last_entries_ids.append(entry.id)
 
 # Configure the fields to connect to Reddit
 client_id = parser.get("config", "client_id")
@@ -35,18 +36,16 @@ reddit.validate_on_submit = True
 # The entries' link is the unique identifier what is compared because that must be unique
 while True:
   sleep(600)
-  feed = parse(feed_link)
   new_entry = feed.entries[0]
-  new_entry_link = new_entry.link
-  if new_entry_link != last_entry_link:
+  new_entry_id = new_entry.id
+  if new_entry_id not in last_entries_ids:
 # Let's check if the article is already posted in the last week
 # If it's a new entry, it shouldn't be
-    search_title = new_entry.title
-    for submission in reddit.subreddit(subreddit).search(search_title, syntax="plain", time_filter="week"):
-      last_entry_link = new_entry_link
+    for submission in reddit.subreddit(subreddit).search(new_entry.title, syntax="plain", time_filter="week"):
+      last_entries_ids.append(new_entry_id)
     else:
 # Let's post on Reddit
       title = new_entry.title
-      link = new_entry_link
+      link = new_entry.link
       reddit.subreddit(subreddit).submit(flair_id=flair_id, title=title, url=link, send_replies=False)
-      last_entry_link = new_entry_link
+      last_entries_ids.append(new_entry_id)
