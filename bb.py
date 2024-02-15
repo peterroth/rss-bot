@@ -1,9 +1,20 @@
 #!/usr/bin/env python3
 import configparser
 import os.path
+import logging
 import praw
 from feedparser import parse
 from time import sleep
+
+# Set filename for logging
+logging.basicConfig(filename='blogbot.log',
+                    encoding='utf-8',
+                    format='%(asctime)s, %(levelname)s: %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S',
+                    level=logging.INFO)
+
+# Record start-up to see restarts
+logging.info("\n  RSS bot started")
 
 # Check if the config file exists
 config_file = os.path.exists("config.txt")
@@ -11,7 +22,7 @@ if config_file:
   parser = configparser.ConfigParser()
   parser.read("config.txt")
 else:
-  print("The required config.txt doesn't exist. Please edit and rename the example_config.txt")
+  logging.critical("The required config.txt doesn't exist. Please edit and rename the example_config.txt")
   exit(1)
 
 # Parse the RSS feed for the first time, we will compare with the got entry later
@@ -20,6 +31,7 @@ feed_link = parser.get("config", "feed_link")
 feed = parse(feed_link)
 for entry in feed.entries:
   last_entries_ids.append(entry.id)
+logging.info("Last entries' IDs at startup are: ", last_entries_ids)
 
 # Configure the fields to connect to Reddit
 client_id = parser.get("config", "client_id")
@@ -39,13 +51,18 @@ while True:
   new_entry = feed.entries[0]
   new_entry_id = new_entry.id
   if new_entry_id not in last_entries_ids:
+    logging.info("New article found! ID: ", new_entry_id)
 # Let's check if the article is already posted in the last week
 # If it's a new entry, it shouldn't be
     for submission in reddit.subreddit(subreddit).search(new_entry.title, syntax="plain", time_filter="week"):
+      logging.info("The article is already posted in the subreddit. Appending it to last entries' list.")
       last_entries_ids.append(new_entry_id)
+      logging.info("List of last entries after appending the article: ", last_entries_ids)
     else:
 # Let's post on Reddit
+      logging.info("The article wasn't shared in ", subreddit, ", let's do it now.")
       title = new_entry.title
       link = new_entry.link
       reddit.subreddit(subreddit).submit(flair_id=flair_id, title=title, url=link, send_replies=False)
       last_entries_ids.append(new_entry_id)
+      logging.info("The article's ID was appeded to the last entries' list.")
