@@ -7,7 +7,7 @@ from feedparser import parse
 from time import sleep
 
 # Set filename for logging
-logging.basicConfig(filename='blogbot.log',
+logging.basicConfig(filename='rss-bot.log',
                     encoding='utf-8',
                     format='%(asctime)s, %(levelname)s: %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
