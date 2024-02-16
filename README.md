@@ -1,5 +1,5 @@
 # WHAT  
-Blog-bot is a simple Python script to parse an RSS feed and if a new post is noticed post its title and URL in a given subreddit on Reddit.  
+RSS bot is a simple Python script to parse an RSS feed and if a new post is noticed post its title and URL in a given subreddit on Reddit.  
 My original idea was to follow a blog and post new content in a subreddit, but the bot can be used with any RSS feed (news, blog, tech, anything).  
   
 # HOW  
