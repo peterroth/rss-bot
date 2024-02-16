@@ -31,7 +31,8 @@ feed_link = parser.get("config", "feed_link")
 feed = parse(feed_link)
 for entry in feed.entries:
   last_entries_ids.append(entry.id)
-logging.info("Last entries' IDs at startup are: ", last_entries_ids)
+message = "Last entries' IDs at startup are: %s"
+logging.info(message % last_entries_ids)
 
 # Configure the fields to connect to Reddit
 client_id = parser.get("config", "client_id")
@@ -40,7 +41,7 @@ username = parser.get("config", "username")
 password = parser.get("config", "password")
 subreddit = parser.get("config", "subreddit").lower()
 flair_id = parser.get("config", "flair_id")
-reddit = praw.Reddit(user_agent="Blog-bot:v1 (by u/ItsMeRPeter)", client_id=client_id,
+reddit = praw.Reddit(user_agent="RSS-bot:v1 (by u/ItsMeRPeter)", client_id=client_id,
                      client_secret=client_secret, username=username, password=password)
 reddit.validate_on_submit = True
 
@@ -57,7 +58,8 @@ while True:
     for submission in reddit.subreddit(subreddit).search(new_entry.title, syntax="plain", time_filter="week"):
       logging.info("The article is already posted in the subreddit. Appending it to last entries' list.")
       last_entries_ids.append(new_entry_id)
-      logging.info("List of last entries after appending the article: ", last_entries_ids)
+      message = "List of last entries after appending the article: %s"
+      logging.info(message % last_entries_ids)
     else:
 # Let's post on Reddit
       logging.info("The article wasn't shared in ", subreddit, ", let's do it now.")
