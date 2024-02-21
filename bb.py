@@ -14,7 +14,7 @@ logging.basicConfig(filename='rss-bot.log',
                     level=logging.INFO)
 
 # Record start-up to see restarts
-logging.info("\n  RSS bot started")
+logging.info("RSS bot started")
 
 # Check if the config file exists
 config_file = os.path.exists("config.txt")
@@ -51,7 +51,8 @@ while True:
   new_entry = feed.entries[0]
   new_entry_id = new_entry.id
   if new_entry_id not in last_entries_ids:
-    logging.info("New article found! ID: ", new_entry_id)
+    message = "New article found! ID: %s"
+    logging.info(message % new_entry_id)
 # Let's check if the article is already posted in the last week
 # If it's a new entry, it shouldn't be
     for submission in reddit.subreddit(subreddit).search(new_entry.title, syntax="plain", time_filter="week"):
