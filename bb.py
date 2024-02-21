@@ -41,8 +41,11 @@ username = parser.get("config", "username")
 password = parser.get("config", "password")
 subreddit = parser.get("config", "subreddit").lower()
 flair_id = parser.get("config", "flair_id")
-reddit = praw.Reddit(user_agent="RSS-bot:v1 (by u/ItsMeRPeter)", client_id=client_id,
-                     client_secret=client_secret, username=username, password=password)
+reddit = praw.Reddit(user_agent="RSS-bot:v1 (by u/ItsMeRPeter)",
+                     client_id=client_id,
+                     client_secret=client_secret,
+                     username=username,
+                     password=password)
 
 # Endless loop what will check the RSS feed in every 10 minutes and compare if there is a new entry
 # The entries' link is the unique identifier what is compared because that must be unique
