@@ -5,7 +5,7 @@ My original idea was to follow a blog and post new content in a subreddit, but t
 # HOW  
 Copy and rename the example_config.txt to config.txt. Edit the fields within the file. To get the client ID and secret you must visit the [Apps page on Reddit](https://ssl.reddit.com/prefs/apps/), create a new application with "Script" type.  
 After the config file is filled with the required data you can start the script. To keep it running in the background use *nohup*:
-`nohup python3 bb.py &`  
+`nohup python3 rss.py &`  
 The default delay between 2 RSS fetches is 10 minutes.  
   
 # CONTRIBUTE  
