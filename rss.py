@@ -51,7 +51,10 @@ reddit = praw.Reddit(user_agent="RSS-bot:v1 (by u/ItsMeRPeter)",
 # The entries' link is the unique identifier what is compared because that must be unique
 while True:
   sleep(600)
-  new_entry = feed.entries[0]
+  try:
+    new_entry = feed.entries[0]
+  except:
+    logging.info("Couldn't parse the RSS feed, something went wrong.")
   new_entry_id = new_entry.id
   if new_entry_id not in last_entries_ids:
     message = "New article found! ID: %s"
@@ -65,9 +68,14 @@ while True:
       logging.info(message % last_entries_ids)
     else:
 # Let's post on Reddit
-      logging.info("The article wasn't shared in ", subreddit, ", let's do it now.")
+      logging.info("The article wasn't shared in the ", subreddit, " subreddit yet, let's do it now.")
       title = new_entry.title
       link = new_entry.link
-      reddit.subreddit(subreddit).submit(flair_id=flair_id, title=title, url=link, send_replies=False)
+      try:
+        reddit.subreddit(subreddit).submit(flair_id=flair_id, title=title, url=link, send_replies=False)
+      except:
+        logging.info("Posting in the ", subreddit, " subreddit wasn't successful. Something went wrong.")
+      else:
+        logging.info("Article successfully posted! Everything is good.")
       last_entries_ids.append(new_entry_id)
       logging.info("The article's ID was appeded to the last entries' list.")
