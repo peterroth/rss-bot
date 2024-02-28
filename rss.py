@@ -53,8 +53,9 @@ while True:
   sleep(600)
   try:
     new_entry = feed.entries[0]
-  except:
-    logging.error("Couldn't parse the RSS feed, something went wrong.")
+  except Exception as e:
+    logging.error("Couldn't parse the RSS feed, the error was: {e}")
+    continue
   new_entry_id = new_entry.id
   if new_entry_id not in last_entries_ids:
     message = "New article found! ID: %s"
@@ -73,8 +74,9 @@ while True:
       link = new_entry.link
       try:
         reddit.subreddit(subreddit).submit(flair_id=flair_id, title=title, url=link, send_replies=False)
-      except:
-        logging.error("Posting in the ", subreddit, " subreddit wasn't successful. Something went wrong.")
+      except Exception as e:
+        logging.error("Posting in the ", subreddit, " subreddit wasn't successful. The error is: {e}")
+        continue
       else:
         logging.info("Article successfully posted! Everything is good.")
       last_entries_ids.append(new_entry_id)
