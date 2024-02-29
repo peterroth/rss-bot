@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 import configparser
-import os.path
 import logging
 import praw
 from feedparser import parse
+from os import path
 from time import sleep
 
 # Set filename for logging
@@ -17,7 +17,7 @@ logging.basicConfig(filename='rss-bot.log',
 logging.info("RSS bot started")
 
 # Check if the config file exists
-config_file = os.path.exists("config.txt")
+config_file = path.exists("config.txt")
 if config_file:
   parser = configparser.ConfigParser()
   parser.read("config.txt")
