@@ -52,10 +52,11 @@ reddit = praw.Reddit(user_agent="RSS-bot:v1 (by u/ItsMeRPeter)",
 while True:
   sleep(600)
   try:
-    new_entry = feed.entries[0]
+    feed = parse(feed_link)
   except Exception as e:
     logging.error(f"Couldn't parse the RSS feed, the error was: {e}")
     continue
+  new_entry = feed.entries[0]
   new_entry_id = new_entry.id
   if new_entry_id not in last_entries_ids:
     message = "New article found! ID: %s"
