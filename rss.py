@@ -54,7 +54,7 @@ while True:
   try:
     new_entry = feed.entries[0]
   except Exception as e:
-    logging.error("Couldn't parse the RSS feed, the error was: {e}")
+    logging.error(f"Couldn't parse the RSS feed, the error was: {e}")
     continue
   new_entry_id = new_entry.id
   if new_entry_id not in last_entries_ids:
@@ -69,13 +69,13 @@ while True:
       logging.info(message % last_entries_ids)
     else:
 # Let's post on Reddit
-      logging.info("The article wasn't shared in the ", subreddit, " subreddit yet, let's do it now.")
+      logging.info("The article wasn't shared in the " + subreddit + " subreddit yet, let's do it now.")
       title = new_entry.title
       link = new_entry.link
       try:
         reddit.subreddit(subreddit).submit(flair_id=flair_id, title=title, url=link, send_replies=False)
       except Exception as e:
-        logging.error("Posting in the ", subreddit, " subreddit wasn't successful. The error is: {e}")
+        logging.error("Posting in the " + subreddit + f" subreddit wasn't successful. The error is: {e}")
         continue
       else:
         logging.info("Article successfully posted! Everything is good.")
