@@ -78,5 +78,5 @@ while True:
         continue
       else:
         logging.info("Article successfully posted! Everything is good.")
-      last_entries_ids.append(new_entry_id)
-      logging.info("The article's ID was appeded to the last entries' list.")
+        last_entries_ids.append(new_entry_id)
+        logging.info("The article's ID was appeded to the last entries' list.")
