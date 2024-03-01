@@ -71,10 +71,8 @@ while True:
     else:
 # Let's post on Reddit
       logging.info("The article wasn't shared in the " + subreddit + " subreddit yet, let's do it now.")
-      title = new_entry.title
-      link = new_entry.link
       try:
-        reddit.subreddit(subreddit).submit(flair_id=flair_id, title=title, url=link, send_replies=False)
+        reddit.subreddit(subreddit).submit(flair_id=flair_id, title=new_entry.title, url=new_entry.link, send_replies=False)
       except Exception as e:
         logging.error("Posting in the " + subreddit + f" subreddit wasn't successful. The error is: {e}")
         continue
