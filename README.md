@@ -3,8 +3,11 @@ RSS bot is a simple Python script to parse an RSS feed and if a new post is noti
 My original idea was to follow a blog and post new content in a subreddit, but the bot can be used with any RSS feed (news, blog, tech, anything).  
   
 # HOW  
-Copy and rename the example_config.txt to config.txt. Edit the fields within the file. To get the client ID and secret you must visit the [Apps page on Reddit](https://ssl.reddit.com/prefs/apps/), create a new application with "Script" type.  
-After the config file is filled with the required data you can start the script. To keep it running in the background use *nohup*:
+Install the required Python packages with *pip*:  
+`pip install -r requirements.txt`  
+Copy and rename the `example_config.txt` to `config.txt`. Edit the fields within the file.  
+To get the client ID and secret you must visit the [Apps page on Reddit](https://ssl.reddit.com/prefs/apps/), create a new application with "Script" type.  
+After the config file is filled with the required data you can start the script. To keep it running in the background use *nohup*:  
 `nohup python3 rss.py &`  
 The default delay between 2 RSS fetches is 10 minutes.  
   
