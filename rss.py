@@ -17,8 +17,7 @@ logging.basicConfig(filename='rss-bot.log',
 logging.info("RSS bot started")
 
 # Check if the config file exists
-config_file = path.exists("config.txt")
-if config_file:
+if path.exists("config.txt"):
   config = configparser.ConfigParser()
   config.read("config.txt")
 else:
