@@ -19,15 +19,15 @@ logging.info("RSS bot started")
 # Check if the config file exists
 config_file = path.exists("config.txt")
 if config_file:
-  parser = configparser.ConfigParser()
-  parser.read("config.txt")
+  config = configparser.ConfigParser()
+  config.read("config.txt")
 else:
   logging.critical("The required config.txt doesn't exist. Please edit and rename the example_config.txt")
   exit(1)
 
 # Parse the RSS feed for the first time, we will compare with the got entry later
 last_entries_ids = []
-feed_link = parser.get("config", "feed_link")
+feed_link = config.get("config", "feed_link")
 feed = parse(feed_link)
 for entry in feed.entries:
   last_entries_ids.append(entry.id)
@@ -35,12 +35,12 @@ message = "Last entries' IDs at startup are: %s"
 logging.info(message % last_entries_ids)
 
 # Configure the fields to connect to Reddit
-client_id = parser.get("config", "client_id")
-client_secret = parser.get("config", "client_secret")
-username = parser.get("config", "username")
-password = parser.get("config", "password")
-subreddit = parser.get("config", "subreddit").lower()
-flair_id = parser.get("config", "flair_id")
+client_id = config.get("config", "client_id")
+client_secret = config.get("config", "client_secret")
+username = config.get("config", "username")
+password = config.get("config", "password")
+subreddit = config.get("config", "subreddit").lower()
+flair_id = config.get("config", "flair_id")
 reddit = praw.Reddit(user_agent="RSS-bot:v1 (by u/ItsMeRPeter)",
                      client_id=client_id,
                      client_secret=client_secret,
