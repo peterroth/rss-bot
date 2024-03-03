@@ -6,6 +6,7 @@ My original idea was to follow a blog and post new content in a subreddit, but t
 Install the required Python packages with *pip*:  
 `pip install -r requirements.txt`  
 Copy and rename the `example_config.txt` to `config.txt`. Edit the fields within the file.  
+The first section's name must remain DEFAULT, the other two can be changed, and you can add additional sections, the script will iterate over them continuously to parse the RSS feed.  
 To get the client ID and secret you must visit the [Apps page on Reddit](https://ssl.reddit.com/prefs/apps/), create a new application with "Script" type.  
 After the config file is filled with the required data you can start the script. To keep it running in the background use *nohup*:  
 `nohup python3 rss.py &`  

@@ -1,8 +1,15 @@
-[config]
-feed_link=link to the feed
+[DEFAULT]
 client_id=client's ID
 client_secret=client's secret
 username=the username
 password=the password of user
-subreddit=the subreddit to post into
+
+[FIRST SUBREDDIT SECTION]
+feed_link=link to the first feed
+subreddit=subreddit to post into
+flair_id=the ID of the flair
+
+[SECOND SUBREDDIT SECTION]
+feed_link=link to the second feed
+subreddit=another subreddit to post into
 flair_id=the ID of the flair
