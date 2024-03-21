@@ -32,7 +32,7 @@ for section in config.sections():
   for entry in feed.entries:
     last_entries_ids.append(entry.id)
 message = "Last entries' IDs at startup are: %s"
-logging.info(message % last_entries_ids)
+logging.debug(message % last_entries_ids)
 
 # Configure the fields to connect to Reddit
 user = config['DEFAULT']
@@ -68,7 +68,7 @@ while True:
         logging.info("The article is already posted in " + subreddit.upper() + "; it'll be appended to last entries' list")
         last_entries_ids.append(new_entry_id)
         message = "List of last entries after appending the article: %s"
-        logging.info(message % last_entries_ids)
+        logging.debug(message % last_entries_ids)
       else:
   # Let's post on Reddit
         logging.info("The article wasn't shared in " + subreddit.upper() + " yet, let's do it now.")
@@ -81,4 +81,4 @@ while True:
         else:
           logging.info("Article successfully posted in " + subreddit.upper() + "! Everything is good.")
           last_entries_ids.append(new_entry_id)
-          logging.info("The article's ID was appeded to the last entries' list.")
+          logging.debug("The article's ID was appeded to the last entries' list.")
